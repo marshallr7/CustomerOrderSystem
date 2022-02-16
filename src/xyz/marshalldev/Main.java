@@ -1,8 +1,11 @@
 package xyz.marshalldev;
 
+import xyz.marshalldev.User.UserManager;
+
 public class Main {
 
     public static void main(String[] args) {
-	// write your code here
+        UserManager u = new UserManager();
+        u.create();
     }
 }
