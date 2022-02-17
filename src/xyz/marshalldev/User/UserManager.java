@@ -2,15 +2,22 @@ package xyz.marshalldev.User;
 
 import xyz.marshalldev.StringUtils;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Scanner;
+import java.util.*;
 
 public class UserManager {
 
     private static final Map<Integer, User> users = new HashMap<>();        // User storage - <User ID - User Object>
     private final Scanner scan = new Scanner(System.in);
-    int attempts = 1;                                         // Number of attempts user has taken to log in
+    int attempts = 1;                                                       // Number of attempts user has taken to log in
+    ArrayList<String> securityQuestions = new ArrayList<>() { {             // List of possible security questions
+            add("1) In what city were you born?");
+            add("2) What is the name of your favorite pet?");
+            add("3) What is your mother's maiden name?");
+            add("4) What high school did you attend?");
+            add("5) What is the name of your first school?");
+            add("6) What was the make of your first car?");
+        }
+    };
 
     public void addUser(User user) {
         users.putIfAbsent(user.getId(), user);
@@ -23,7 +30,7 @@ public class UserManager {
     public void create() {
         int id = 0;
         String password = null;
-        String question;
+        String question = null;
         String answer;
 
         id = getID();
@@ -36,8 +43,7 @@ public class UserManager {
             password = getPassword();
         }
 
-        System.out.println("Enter a security question: ");
-        question = scan.next();
+        
         System.out.println("Enter an answer: ");
         answer = scan.next();
         User user = new User(id, password, question, answer);
@@ -81,6 +87,23 @@ public class UserManager {
     private String getPassword() {
         System.out.println("Enter a password: ");
          return scan.next();
+    }
+    
+    private String selectSecurityQuestion() {
+        System.out.println("Select a security question: ");
+
+        for (String securityQuestion : securityQuestions) {
+            System.out.println(securityQuestion);
+        }
+
+        int selection = scan.nextInt();
+
+        return securityQuestions.get(selection-1);
+    }
+
+    private String getSecurityQuestionAnswer() {
+        System.out.println("Enter the answer: ");
+        return scan.next();
     }
 
     // Check if ID exists in users
