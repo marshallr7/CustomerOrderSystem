@@ -10,6 +10,17 @@ public class User {
     private String address;
     private long cardNumber;
 
+
+    public User(int id, String password, String question, String answer, String name, String address, long cardNumber) {
+        this.id = id;
+        this.password = password;
+        this.question = question;
+        this.answer = answer;
+        this.name = name;
+        this.address = address;
+        this.cardNumber = cardNumber;
+    }
+
     public User(int id, String password, String question, String answer) {
         this.id = id;
         this.password = password;
