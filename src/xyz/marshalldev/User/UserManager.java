@@ -10,13 +10,13 @@ public class UserManager {
 
     private static final Map<Integer, User> users = new HashMap<>();        // User storage - <User ID - User Object>
     private final Scanner scan = new Scanner(System.in);
-    private final int attempts = 0;                                         // Number of attempts user has taken to log in
+    int attempts = 1;                                         // Number of attempts user has taken to log in
 
     public void addUser(User user) {
         users.putIfAbsent(user.getId(), user);
     }
 
-    public User get(int id) {
+    public User getUser(int id) {
         return users.get(id);
     }
 
@@ -44,25 +44,38 @@ public class UserManager {
         addUser(user);
     }
 
-    public void login() {
+    public User login() {
         int id;
         String password;
         User user = null;
 
-        System.out.println("Enter your ID: ");
-        id = Integer.parseInt(scan.next());
-        System.out.println("Enter your password: ");
-        password = scan.next();
+        id = getID();
+        password = getPassword();
 
-        if (get(id) == null || !password.equals(get(id).getPassword())) {
-
+        if (getUser(id) == null || !users.containsKey(id)) {
+            System.out.println("ID does not exist in the system.");
+            System.exit(0);
         }
+
+        while (!password.equals(getUser(id).getPassword())) {
+            if (attempts >= 3) {
+                // Project doesn't describe what it wants us to do if max attempts is exceeded, so assuming this.
+                System.out.println("Maximum attempts exceeded. Terminating program.");
+                System.exit(0);
+            }
+            System.out.println("Incorrect password. Attempt " + attempts + "/3");
+            attempts++;
+            password = getPassword();
+        }
+
+        System.out.println("Login successful" + "\nWelcome to Customer Order System!");
+        user = getUser(id);
+        return user;
     }
 
     private int getID() {
         System.out.println("Enter an id: ");
-        int id = Integer.parseInt(scan.next());
-        return id;
+        return Integer.parseInt(scan.next());
     }
 
     private String getPassword() {
