@@ -6,6 +6,9 @@ public class User {
     private String password;
     private String question;
     private String answer;
+    private String name;
+    private String address;
+    private long cardNumber;
 
     public User(int id, String password, String question, String answer) {
         this.id = id;
