@@ -30,24 +30,43 @@ public class UserManager {
     public void create() {
         int id = 0;
         String password = null;
-        String question = null;
+        String name;
+        String address;
+        long creditCardNumber;
+        String securityQuestion;
         String answer;
 
+        // ID handling
         id = enterID();
         while (checkID(id) || id == 0) {
             System.out.println("ID value is already taken");
             id = enterID();
         }
 
+        // Password handling
         while (StringUtils.checkPassword(password)) {
             password = enterPassword();
         }
 
-        
-        System.out.println("Enter an answer: ");
-        answer = scan.next();
-        User user = new User(id, password, question, answer);
-        addUser(user);
+        name = enterName();
+        address = enterAddress();
+        creditCardNumber = enterCreditCardNumber();
+
+        securityQuestion = selectSecurityQuestion();
+        answer = enterSecurityQuestionAnswer();
+
+        User user = new User(id, password, securityQuestion, answer, name, address, creditCardNumber);
+
+        // Confirmation
+        System.out.println("\nIs the following information correct? (Y/N)\n " + user.toString());
+        char confirmation = scan.next().toLowerCase().charAt(0);
+
+        if (confirmation == 'y') {
+            addUser(user);
+            System.out.println("Account successfully created.");
+            return;
+        }
+        create();
     }
 
     public User login() {
@@ -58,11 +77,13 @@ public class UserManager {
         id = enterID();
         password = enterPassword();
 
+        // User ID handling
         if (getUser(id) == null || !users.containsKey(id)) {
             System.out.println("ID does not exist in the system.");
             System.exit(0);
         }
 
+        // User password handling
         while (!password.equals(getUser(id).getPassword())) {
             if (attempts >= 3) {
                 // Project doesn't describe what it wants us to do if max attempts is exceeded, so assuming this.
@@ -100,6 +121,21 @@ public class UserManager {
     private String enterPassword() {
         System.out.println("Enter a password: ");
         return scan.next();
+    }
+
+    private String enterName() {
+        System.out.println("Enter your name: ");
+        return scan.next();
+    }
+
+    private String enterAddress() {
+        System.out.println("Enter your address: ");
+        return scan.nextLine();
+    }
+
+    private long enterCreditCardNumber() {
+        System.out.println("Enter your credit card number: ");
+        return scan.nextLong();
     }
 
 
