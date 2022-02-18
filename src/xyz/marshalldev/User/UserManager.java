@@ -33,14 +33,14 @@ public class UserManager {
         String question = null;
         String answer;
 
-        id = getID();
+        id = enterID();
         while (checkID(id) || id == 0) {
             System.out.println("ID value is already taken");
-            id = getID();
+            id = enterID();
         }
 
         while (StringUtils.checkPassword(password)) {
-            password = getPassword();
+            password = enterPassword();
         }
 
         
@@ -55,8 +55,8 @@ public class UserManager {
         String password;
         User user = null;
 
-        id = getID();
-        password = getPassword();
+        id = enterID();
+        password = enterPassword();
 
         if (getUser(id) == null || !users.containsKey(id)) {
             System.out.println("ID does not exist in the system.");
@@ -71,7 +71,7 @@ public class UserManager {
             }
             System.out.println("Incorrect password. Attempt " + attempts + "/3");
             attempts++;
-            password = getPassword();
+            password = enterPassword();
         }
 
         System.out.println("Login successful" + "\nWelcome to Customer Order System!");
@@ -79,15 +79,6 @@ public class UserManager {
         return user;
     }
 
-    private int getID() {
-        System.out.println("Enter an id: ");
-        return Integer.parseInt(scan.next());
-    }
-
-    private String getPassword() {
-        System.out.println("Enter a password: ");
-         return scan.next();
-    }
     
     private String selectSecurityQuestion() {
         System.out.println("Select a security question: ");
@@ -101,7 +92,18 @@ public class UserManager {
         return securityQuestions.get(selection-1);
     }
 
-    private String getSecurityQuestionAnswer() {
+    private int enterID() {
+        System.out.println("Enter an id: ");
+        return Integer.parseInt(scan.next());
+    }
+
+    private String enterPassword() {
+        System.out.println("Enter a password: ");
+        return scan.next();
+    }
+
+
+    private String enterSecurityQuestionAnswer() {
         System.out.println("Enter the answer: ");
         return scan.next();
     }
