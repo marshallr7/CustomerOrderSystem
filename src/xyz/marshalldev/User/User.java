@@ -88,4 +88,15 @@ public class User {
     public void setCardNumber(long cardNumber) {
         this.cardNumber = cardNumber;
     }
+
+    @Override
+    public String toString() {
+        return "\nid: " + id +
+                "\npassword:" + password +
+                "\nquestion: " + question +
+                "\nanswer: " + answer +
+                "\nname: " + name +
+                "\naddress: " + address +
+                "\ncardNumber: " + cardNumber;
+    }
 }
