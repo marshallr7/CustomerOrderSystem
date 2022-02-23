@@ -1,39 +1,39 @@
 package xyz.marshalldev.User;
 
-import javax.swing.*;
+import xyz.marshalldev.Cart;
 
 public class User {
-    private int id;
-    private String password;
-    private String securityQuestion;
-    private String answer;
 
-    public void create() {
-        JTextField id = new JTextField();
-        JTextField password = new JPasswordField();
-        JTextField question = new JTextField();
-        JTextField answer = new JTextField();
-        Object[] message = {
-                "ID:", id,
-                "Password:", password,
-                "Security Question:", question,
-                "Answer:", answer
-        };
+    private int id;                 // User id number
+    private String password;        // User password
+    private String question;        // User security question
+    private String answer;          // User security question answer
+    private String name;            // Users name
+    private String address;         // Users address
+    private long cardNumber;        // Users credit card number
 
-        int option = JOptionPane.showConfirmDialog(null, message, "Login", JOptionPane.OK_CANCEL_OPTION);
+    private Cart cart;              // Users cart
 
-        if (option == JOptionPane.OK_OPTION) {
-            if (id.getText() != null && password.getText() != null && question.getText() != null && answer.getText() != null) {
-                User user = new User();
-                user.setId(Integer.parseInt(id.getText()));
-                user.setPassword(password.getText());
-                user.setSecurityQuestion(question.getText());
-                user.setAnswer(answer.getText());
-                UserCache.getInstance().addUser(user);
-            } else {
-                create();
-            }
-        }
+    public User(int id, String password, String question, String answer, String name, String address, long cardNumber) {
+        this.id = id;
+        this.password = password;
+        this.question = question;
+        this.answer = answer;
+        this.name = name;
+        this.address = address;
+        this.cardNumber = cardNumber;
+    }
+
+    public User(int id, String password, String question, String answer) {
+        this.id = id;
+        this.password = password;
+        this.question = question;
+        this.answer = answer;
+    }
+
+    public User(int id, String password) {
+        this.id = id;
+        this.password = password;
     }
 
     public int getId() {
@@ -52,12 +52,12 @@ public class User {
         this.password = password;
     }
 
-    public String getSecurityQuestion() {
-        return securityQuestion;
+    public String getQuestion() {
+        return question;
     }
 
-    public void setSecurityQuestion(String securityQuestion) {
-        this.securityQuestion = securityQuestion;
+    public void setQuestion(String question) {
+        this.question = question;
     }
 
     public String getAnswer() {
@@ -68,8 +68,42 @@ public class User {
         this.answer = answer;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public long getCardNumber() {
+        return cardNumber;
+    }
+
+    public void setCardNumber(long cardNumber) {
+        this.cardNumber = cardNumber;
+    }
+
+    public Cart getCart() {
+        return cart;
+    }
+
     @Override
     public String toString() {
-        return "ID: " + this.id + "\nPassword: " + this.password + "\nSecurity Question: " + this.securityQuestion + "\nAnswer:" + this.answer;
+        return "\nid: " + id +
+                "\npassword:" + password +
+                "\nquestion: " + question +
+                "\nanswer: " + answer +
+                "\nname: " + name +
+                "\naddress: " + address +
+                "\ncardNumber: " + cardNumber;
     }
 }
