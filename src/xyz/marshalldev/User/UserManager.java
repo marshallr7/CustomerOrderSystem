@@ -1,5 +1,8 @@
 package xyz.marshalldev.User;
 
+import xyz.marshalldev.Bank.Account;
+import xyz.marshalldev.Bank.Bank;
+import xyz.marshalldev.Main;
 import xyz.marshalldev.StringUtils;
 
 import java.util.*;
@@ -7,7 +10,8 @@ import java.util.*;
 public class UserManager {
 
     private static final Map<Integer, User> users = new HashMap<>();        // User storage - <User ID - User Object>
-    private final Scanner scan = new Scanner(System.in);
+    private final Scanner scan = new Scanner(System.in);                    // Scanner used to obtain user input
+    private static UserManager instance;                                    // Instance of UserManager
     int attempts = 1;                                                       // Number of attempts user has taken to log in
     ArrayList<String> securityQuestions = new ArrayList<>() { {             // List of possible security questions
             add("1) In what city were you born?");
@@ -18,6 +22,17 @@ public class UserManager {
             add("6) What was the make of your first car?");
         }
     };
+
+    public static UserManager getInstance() {
+        if (instance == null) {
+            synchronized (UserManager.class) {
+                if (instance == null) {
+                    instance = new UserManager();
+                }
+            }
+        }
+        return instance;
+    }
 
     public void addUser(User user) {
         users.putIfAbsent(user.getId(), user);
@@ -63,6 +78,7 @@ public class UserManager {
 
         if (confirmation == 'y') {
             addUser(user);
+            Bank.addAccount(creditCardNumber, new Account(15000));
             System.out.println("Account successfully created.");
             return;
         }
@@ -98,6 +114,14 @@ public class UserManager {
         System.out.println("Login successful" + "\nWelcome to Customer Order System!");
         user = getUser(id);
         return user;
+    }
+
+    public void logout() {
+        if (Main.getUser() == null) {
+            return;
+        }
+        Main.setUser(null);
+        System.out.println("Successfully logged out.");
     }
 
     

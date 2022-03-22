@@ -9,7 +9,7 @@ class UserManagerTest {
     private final UserManager u = new UserManager();
     private final Scanner scan = new Scanner(System.in);
 
-    private void login(int id, String password) {
+    private User login(int id, String password) {
         User user = null;
 
         if (u.getUser(id) == null) {
@@ -29,6 +29,7 @@ class UserManagerTest {
 
         System.out.println("Login successful" + "\nWelcome to Customer Order System!");
         user = u.getUser(id);
+        return user;
     }
 
     private String getPassword() {

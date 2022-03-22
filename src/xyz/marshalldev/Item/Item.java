@@ -9,12 +9,13 @@ public class Item {
     boolean onSale;
     private int stock;
 
-    public Item(String name, String description, double price, double salePrice, boolean onSale) {
+    public Item(String name, String description, double price, double salePrice, boolean onSale, int stock) {
         this.name = name;
         this.description = description;
         this.price = price;
         this.salePrice = salePrice;
         this.onSale = onSale;
+        this.stock = stock;
     }
 
     public int getStock() {
@@ -64,6 +65,8 @@ public class Item {
     public void setOnSale(boolean onSale) {
         this.onSale = onSale;
     }
+
+
 
     @Override
     public String toString() {

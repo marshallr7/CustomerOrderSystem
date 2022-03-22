@@ -22,6 +22,7 @@ public class User {
         this.name = name;
         this.address = address;
         this.cardNumber = cardNumber;
+        this.cart = new Cart();
     }
 
     public User(int id, String password, String question, String answer) {

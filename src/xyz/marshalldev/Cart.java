@@ -8,14 +8,22 @@ import java.util.Map;
 public class Cart {
     private double SHIPPING_PRICE = 3;                      // Price for shipping
 
-    private Map<Item, Integer> cart = new HashMap<>();      // Storage of items <Item - quantity>
+    private Map<Item, Integer> cart;      // Storage of items <Item - quantity>
 
     private double total;                                   // Total price of all cart items
     private boolean shipping;                               // Shipping if True, else pickup
 
+    public Cart() {
+        cart = new HashMap<>();
+    }
+
     public void addItem(Item item, int amount) {
-        // TODO add checks for what to do if item is already in cart
-        cart.putIfAbsent(item, amount);
+        if (!cart.containsKey(item)) {
+            cart.put(item, amount);
+        } else {
+            cart.put(item, cart.get(item) + amount);
+        }
+        addToTotal(item, amount);
     }
 
     public void removeItem(Item item, int amount) {
@@ -29,23 +37,50 @@ public class Cart {
             return;
         }
         cart.remove(item);
+        removeFromTotal(item, amount);
     }
 
     public void removeItem(Item item) {
         cart.remove(item);
     }
 
-    // TODO maybe this isn't the best way to handle this. Maybe update total when a user adds or removes an item from the cart
-    public void calculateTotal() {
-        for (Item i : cart.keySet()) {
-            double price = i.getPrice();
-            int quantity = cart.get(i);
-            this.total += price*quantity;
+    private void addToTotal(Item item, int amount) {
+        double price = 0;
+        if (!item.isOnSale()) {
+            price = item.getPrice();
+        } else {
+            price = item.getSalePrice();
         }
+
+        total += price*amount;
     }
 
-    @Override
-    public String toString() {
-        return cart.toString();
+    private void removeFromTotal(Item item, int amount) {
+        double price = 0;
+        if (!item.isOnSale()) {
+            price = item.getPrice();
+        } else {
+            price = item.getSalePrice();
+        }
+
+        total -= price*amount;
+    }
+
+    public boolean isShipping() {
+        return shipping;
+    }
+
+    public void setShipping(boolean shipping) {
+        this.shipping = shipping;
+    }
+
+    public boolean isEmpty() {
+        return cart.isEmpty();
+    }
+
+    public void display() {
+        for (Item i : cart.keySet()) {
+            System.out.println(cart.get(i) + "x " + i.getName());
+        }
     }
 }
