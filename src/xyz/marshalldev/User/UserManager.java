@@ -38,6 +38,12 @@ public class UserManager {
         users.putIfAbsent(user.getId(), user);
     }
 
+    public void addUsers(User... user) {
+        for (User u : user) {
+            users.put(u.getId(), u);
+        }
+    }
+
     public User getUser(int id) {
         return users.get(id);
     }
