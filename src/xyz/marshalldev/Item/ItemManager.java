@@ -9,7 +9,7 @@ import java.util.Scanner;
 
 public class ItemManager {
 
-    private Map<String, Item> items = new HashMap<>();           // Storage of items <ItemName - Item Object>
+    private final Map<String, Item> items = new HashMap<>();                  // Storage of items <ItemName - Item Object>
     private static ItemManager instance;
 
     public static ItemManager getInstance() {
@@ -23,28 +23,19 @@ public class ItemManager {
         return instance;
     }
 
-    public boolean purchase(Item item, int quantity, Cart cart) {
+    public void purchase(Item item, int quantity, Cart cart) {
         if (!items.containsKey(item.getName())) {
             System.out.println("Item does not exist in system.");
-            return false;
+            return;
         }
-        if (!(items.get(item.getName()).getStock() >= quantity)) {
-            System.out.println("Attempted quantity exceeds amount in stock");
-            return false;
-        }
-        purchase(item, quantity);
         cart.addItem(item, quantity);
-        return true;
     }
 
-    private void purchase(Item item, int quantity) {
-        items.remove(item, quantity);
-    }
 
     public Item getAttemptedItemPurchase() {
         String userInput = getItemInput();
 
-        if (userInput == "7") {
+        if (userInput.equals("7")) {
             return null;
         }
 
