@@ -7,23 +7,13 @@ public class Item {
     private double price;
     private double salePrice;
     boolean onSale;
-    private int stock;
 
-    public Item(String name, String description, double price, double salePrice, boolean onSale, int stock) {
+    public Item(String name, String description, double price, double salePrice, boolean onSale) {
         this.name = name;
         this.description = description;
         this.price = price;
         this.salePrice = salePrice;
         this.onSale = onSale;
-        this.stock = stock;
-    }
-
-    public int getStock() {
-        return stock;
-    }
-
-    public void setStock(int stock) {
-        this.stock = stock;
     }
 
     public String getName() {
@@ -74,7 +64,6 @@ public class Item {
                 "\n   Description: " + this.description +
                 "\n   Regular Price: " + this.price +
                 "\n   Sale price: " + this.salePrice +
-                "\n   On sale: " + this.onSale +
-                "\n   Quantity in Stock: " + this.stock;
+                "\n   On sale: " + this.onSale;
     }
 }
