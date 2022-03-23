@@ -2,21 +2,21 @@ package xyz.marshalldev.Bank;
 
 public class Account {
 
-    int balance;
+    double balance = 0;
 
-    public Account(int balance) {
+    public Account(double balance) {
         this.balance = balance;
     }
 
-    public int getBalance() {
+    public double getBalance() {
         return balance;
     }
 
-    public void addBalance(int balance) {
+    public void addBalance(double balance) {
         this.balance = this.balance + balance;
     }
 
-    public void removeBalance(int balance) {
+    public void removeBalance(double balance) {
         this.balance = this.balance - balance;
     }
 }
