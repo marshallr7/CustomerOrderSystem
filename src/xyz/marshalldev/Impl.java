@@ -20,10 +20,11 @@ public class Impl {
             System.out.println("5) Check balance");
             System.out.println("6) Checkout");
             System.out.println("7) Logout");
+            System.out.println("10) Exit");
         } else {
             System.out.println("1) Create user");
             System.out.println("2) Login");
-            System.out.println("3) Exit");
+            System.out.println("10) Exit");
         }
 
         int option = 0;
@@ -37,8 +38,7 @@ public class Impl {
 
     private static int getOption() {
         Scanner scan = new Scanner(System.in);
-        int option = scan.nextInt();
-        return option;
+        return scan.nextInt();
     }
 
     private static void action(int option) {
@@ -65,13 +65,20 @@ public class Impl {
                         System.out.println("Your cart is empty.");
                     }
                     break;
-                    //check order status
+                    //check order
                 case 4:
-//                    if ()
+                    if (!user.getOrders().isEmpty()) {
+                        user.getOrders().forEach(o -> {
+                            System.out.println("Order number: " + o.getOrderNumber());
+                            System.out.println("\tDate: " + o.getDate());
+                            o.getCart().display();
+                        });
+                    } else {
+                        System.out.println("You have no orders");
+                    }
                     break;
                     //check balance
                 case 5:
-
                     System.out.println("Bank balance: $" + Bank.getAccount(user.getCardNumber()).getBalance());
                     break;
                     // checkout
@@ -79,31 +86,32 @@ public class Impl {
                     if (user.getCart().isEmpty()) {
                         System.out.println("Your cart is empty.");
                     } else {
-                        // generate order number
-                        // store the cart contents
-                        // add order to user
+                        user.getCart().setTotal(user.getCart().getTotal()*user.getCart().getTAX_RATE());
+                        if (Bank.getAccount(user.getCardNumber()).getBalance() >= user.getCart().getTotal()) {
+                            int orderNumber = Bank.generateConfirmation();
+                            Bank.getAccount(user.getCardNumber()).removeBalance(user.getCart().getTotal());
+                            Order order = new Order(user.getCart(), orderNumber);
+                            user.addOrder(order);
+                            user.setCart(new Cart());
+                            System.out.println("Order successfully placed, your confirmation number is: " + orderNumber);
+                        } else {
+                            System.out.println("Insufficient funds, can not complete purchase.");
+                        }
                     }
                     break;
                 case 7:
                     usermanager.logout();
                     break;
                 default:
+                    System.exit(0);
                     break;
             }
         } else {
             switch (option) {
-                case 1:
-                    usermanager.create();
-                    break;
-                case 2:
-                    Main.setUser(usermanager.login());
-                    break;
-                case 3:
-                    System.exit(0);
-                    break;
-                default:
-                    System.out.println("Error... Invalid input.");
-                    break;
+                case 1 -> usermanager.create();
+                case 2 -> Main.setUser(usermanager.login());
+                case 3 -> System.exit(0);
+                default -> System.out.println("Error... Invalid input.");
             }
         }
     }
