@@ -6,9 +6,10 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Cart {
-    private double SHIPPING_PRICE = 3;                      // Price for shipping
+    private final double SHIPPING_PRICE = 3;                // Price for shipping
+    private final double TAX_RATE = 0.825;                  // Tax percentage
 
-    private Map<Item, Integer> cart;      // Storage of items <Item - quantity>
+    private final Map<Item, Integer> cart;                  // Storage of items <Item - quantity>
 
     private double total;                                   // Total price of all cart items
     private boolean shipping;                               // Shipping if True, else pickup
@@ -80,7 +81,24 @@ public class Cart {
 
     public void display() {
         for (Item i : cart.keySet()) {
-            System.out.println(cart.get(i) + "x " + i.getName());
+            System.out.println("\t" + cart.get(i) + "x " + i.getName());
         }
+    }
+
+    public void clear() {
+        total = 0;
+        cart.clear();
+    }
+
+    public double getTotal() {
+        return total;
+    }
+
+    public void setTotal(double total) {
+        this.total = total;
+    }
+
+    public double getTAX_RATE() {
+        return TAX_RATE;
     }
 }
