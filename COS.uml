@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement>xyz.marshalldev.User.User</OriginalElement>
+  <nodes>
+    <node x="24.08279914529902" y="1439.0">xyz.marshalldev.Bank.Bank</node>
+    <node x="202.95833333333331" y="2438.0">xyz.marshalldev.Item.ItemManager</node>
+    <node x="300.8744658119657" y="460.0">xyz.marshalldev.Cart</node>
+    <node x="282.5833333333333" y="878.0">xyz.marshalldev.Order</node>
+    <node x="236.16666666666663" y="1912.0">xyz.marshalldev.User.UserManager</node>
+    <node x="297.2489316239315" y="1186.0">xyz.marshalldev.User.User</node>
+    <node x="62.70779914529902" y="933.0">xyz.marshalldev.Bank.Account</node>
+    <node x="166.70779914529902" y="0.0">xyz.marshalldev.Item.Item</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="xyz.marshalldev.Order" target="xyz.marshalldev.Cart" relationship="TO_ONE">
+      <point x="46.25" y="-127.0" />
+      <point x="421.3333333333333" y="856.0" />
+      <point x="405.91559829059815" y="856.0" />
+      <point x="405.91559829059815" y="846.0" />
+      <point x="410.8744658119657" y="846.0" />
+      <point x="0.0" y="182.0" />
+    </edge>
+    <edge source="xyz.marshalldev.User.User" target="xyz.marshalldev.Order" relationship="TO_MANY">
+      <point x="0.0" y="-336.0" />
+      <point x="452.7489316239315" y="1164.0" />
+      <point x="443.98130341880335" y="1164.0" />
+      <point x="443.98130341880335" y="1154.0" />
+      <point x="421.3333333333333" y="1154.0" />
+      <point x="46.25" y="127.0" />
+    </edge>
+    <edge source="xyz.marshalldev.Item.ItemManager" target="xyz.marshalldev.Item.Item" relationship="DEPENDENCY">
+      <point x="-60.5" y="-138.0" />
+      <point x="263.4583333333333" y="2417.0" />
+      <point x="63.22596153846149" y="2417.0" />
+      <point x="63.22596153846149" y="2407.0" />
+      <point x="0.0" y="2407.0" />
+      <point x="0.0" y="439.0" />
+      <point x="270.957799145299" y="439.0" />
+      <point x="270.957799145299" y="429.0" />
+      <point x="237.70779914529902" y="429.0" />
+      <point x="-71.0" y="204.0" />
+    </edge>
+    <edge source="xyz.marshalldev.Bank.Bank" target="xyz.marshalldev.Bank.Account" relationship="TO_MANY">
+      <point x="-55.25" y="-83.0" />
+      <point x="79.33279914529902" y="1164.0" />
+      <point x="92.20779914529902" y="1164.0" />
+      <point x="-59.0" y="72.0" />
+    </edge>
+    <edge source="xyz.marshalldev.User.User" target="xyz.marshalldev.Cart" relationship="CREATE">
+      <point x="103.66666666666669" y="-336.0" />
+      <point x="556.4155982905982" y="1164.0" />
+      <point x="520.6426282051282" y="1164.0" />
+      <point x="520.6426282051282" y="856.0" />
+      <point x="484.20779914529896" y="856.0" />
+      <point x="73.33333333333326" y="182.0" />
+    </edge>
+    <edge source="xyz.marshalldev.Item.ItemManager" target="xyz.marshalldev.User.UserManager" relationship="DEPENDENCY">
+      <point x="-60.5" y="-138.0" />
+      <point x="263.4583333333333" y="2417.0" />
+      <point x="63.22596153846149" y="2417.0" />
+      <point x="63.22596153846149" y="2407.0" />
+      <point x="359.66666666666663" y="2407.0" />
+      <point x="0.0" y="237.0" />
+    </edge>
+    <edge source="xyz.marshalldev.User.UserManager" target="xyz.marshalldev.Bank.Bank" relationship="DEPENDENCY">
+      <point x="-82.33333333333331" y="-237.0" />
+      <point x="277.3333333333333" y="1890.0" />
+      <point x="134.58279914529902" y="1890.0" />
+      <point x="0.0" y="83.0" />
+    </edge>
+    <edge source="xyz.marshalldev.User.User" target="xyz.marshalldev.Order" relationship="DEPENDENCY">
+      <point x="-103.66666666666669" y="-336.0" />
+      <point x="349.08226495726484" y="1164.0" />
+      <point x="328.8333333333333" y="1164.0" />
+      <point x="-46.25" y="127.0" />
+    </edge>
+    <edge source="xyz.marshalldev.Item.ItemManager" target="xyz.marshalldev.Cart" relationship="DEPENDENCY">
+      <point x="-60.5" y="-138.0" />
+      <point x="263.4583333333333" y="2417.0" />
+      <point x="63.22596153846149" y="2417.0" />
+      <point x="63.22596153846149" y="2407.0" />
+      <point x="13.58279914529902" y="2407.0" />
+      <point x="13.58279914529902" y="856.0" />
+      <point x="225.37446581196582" y="856.0" />
+      <point x="225.37446581196582" y="846.0" />
+      <point x="337.54113247863233" y="846.0" />
+      <point x="-73.33333333333337" y="182.0" />
+    </edge>
+    <edge source="xyz.marshalldev.Item.ItemManager" target="xyz.marshalldev.Item.Item" relationship="TO_MANY">
+      <point x="60.5" y="-138.0" />
+      <point x="384.4583333333333" y="2417.0" />
+      <point x="618.7489316239315" y="2417.0" />
+      <point x="618.7489316239315" y="439.0" />
+      <point x="448.6244658119657" y="439.0" />
+      <point x="448.6244658119657" y="429.0" />
+      <point x="379.707799145299" y="429.0" />
+      <point x="71.0" y="204.0" />
+    </edge>
+    <edge source="xyz.marshalldev.User.UserManager" target="xyz.marshalldev.User.User" relationship="TO_MANY">
+      <point x="82.33333333333337" y="-237.0" />
+      <point x="442.0" y="1890.0" />
+      <point x="530.4989316239315" y="1890.0" />
+      <point x="77.75" y="336.0" />
+    </edge>
+    <edge source="xyz.marshalldev.Cart" target="xyz.marshalldev.Item.Item" relationship="TO_MANY">
+      <point x="55.0" y="-182.0" />
+      <point x="465.8744658119657" y="439.0" />
+      <point x="448.6244658119657" y="439.0" />
+      <point x="448.6244658119657" y="429.0" />
+      <point x="379.707799145299" y="429.0" />
+      <point x="71.0" y="204.0" />
+    </edge>
+    <edge source="xyz.marshalldev.Bank.Bank" target="xyz.marshalldev.Bank.Account" relationship="DEPENDENCY">
+      <point x="55.25" y="-83.0" />
+      <point x="189.83279914529902" y="1164.0" />
+      <point x="151.20779914529902" y="1164.0" />
+      <point x="0.0" y="72.0" />
+    </edge>
+    <edge source="xyz.marshalldev.User.UserManager" target="xyz.marshalldev.User.User" relationship="CREATE">
+      <point x="0.0" y="-237.0" />
+      <point x="359.66666666666663" y="1890.0" />
+      <point x="395.7494658119658" y="1890.0" />
+      <point x="395.7494658119658" y="1880.0" />
+      <point x="374.9989316239315" y="1880.0" />
+      <point x="-77.75" y="336.0" />
+    </edge>
+    <edge source="xyz.marshalldev.User.UserManager" target="xyz.marshalldev.Bank.Account" relationship="CREATE">
+      <point x="0.0" y="-237.0" />
+      <point x="359.66666666666663" y="1890.0" />
+      <point x="395.7494658119658" y="1890.0" />
+      <point x="395.7494658119658" y="1880.0" />
+      <point x="268.957799145299" y="1880.0" />
+      <point x="268.957799145299" y="1164.0" />
+      <point x="210.20779914529902" y="1164.0" />
+      <point x="59.0" y="72.0" />
+    </edge>
+    <edge source="xyz.marshalldev.Order" target="xyz.marshalldev.Cart" relationship="DEPENDENCY">
+      <point x="-46.25" y="-127.0" />
+      <point x="328.8333333333333" y="856.0" />
+      <point x="225.3744658119658" y="856.0" />
+      <point x="225.37446581196582" y="846.0" />
+      <point x="337.54113247863233" y="846.0" />
+      <point x="-73.33333333333337" y="182.0" />
+    </edge>
+    <edge source="xyz.marshalldev.User.User" target="xyz.marshalldev.Cart" relationship="TO_ONE">
+      <point x="0.0" y="-336.0" />
+      <point x="452.7489316239315" y="1164.0" />
+      <point x="443.98130341880335" y="1164.0" />
+      <point x="443.98130341880335" y="1154.0" />
+      <point x="478.0833333333333" y="1154.0" />
+      <point x="478.0833333333333" y="856.0" />
+      <point x="405.91559829059815" y="856.0" />
+      <point x="405.91559829059815" y="846.0" />
+      <point x="410.8744658119657" y="846.0" />
+      <point x="0.0" y="182.0" />
+    </edge>
+    <edge source="xyz.marshalldev.Cart" target="xyz.marshalldev.Item.Item" relationship="DEPENDENCY">
+      <point x="-55.0" y="-182.0" />
+      <point x="355.8744658119657" y="439.0" />
+      <point x="270.957799145299" y="439.0" />
+      <point x="270.957799145299" y="429.0" />
+      <point x="237.70779914529902" y="429.0" />
+      <point x="-71.0" y="204.0" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic" zoom="0.6482443306510608" showDependencies="true" x="-397.79504034305694" y="360.2307735710658" />
+  <SelectedNodes />
+  <Categories>
+    <Category>Constructors</Category>
+    <Category>Fields</Category>
+    <Category>Methods</Category>
+  </Categories>
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+
