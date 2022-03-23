@@ -1,18 +1,26 @@
 package xyz.marshalldev.User;
 
+import xyz.marshalldev.Bank.Account;
+import xyz.marshalldev.Bank.Bank;
 import xyz.marshalldev.Cart;
+import xyz.marshalldev.Main;
+import xyz.marshalldev.Order;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class User {
 
-    private int id;                 // User id number
-    private String password;        // User password
-    private String question;        // User security question
-    private String answer;          // User security question answer
-    private String name;            // Users name
-    private String address;         // Users address
-    private long cardNumber;        // Users credit card number
+    private int id;                                         // User id number
+    private String password;                                // User password
+    private String question;                                // User security question
+    private String answer;                                  // User security question answer
+    private String name;                                    // Users name
+    private String address;                                 // Users address
+    private long cardNumber;                                // Users credit card number
 
-    private Cart cart;              // Users cart
+    private Cart cart;                                      // Users cart
+    private final List<Order> orders = new ArrayList<>();   // List of orders
 
     public User(int id, String password, String question, String answer, String name, String address, long cardNumber) {
         this.id = id;
@@ -23,18 +31,7 @@ public class User {
         this.address = address;
         this.cardNumber = cardNumber;
         this.cart = new Cart();
-    }
-
-    public User(int id, String password, String question, String answer) {
-        this.id = id;
-        this.password = password;
-        this.question = question;
-        this.answer = answer;
-    }
-
-    public User(int id, String password) {
-        this.id = id;
-        this.password = password;
+        Bank.addAccount(cardNumber, new Account(Main.STARTING_BANK_BALANCE));
     }
 
     public int getId() {
@@ -95,6 +92,18 @@ public class User {
 
     public Cart getCart() {
         return cart;
+    }
+
+    public void setCart(Cart cart) {
+        this.cart = cart;
+    }
+
+    public void addOrder(Order order) {
+        orders.add(order);
+    }
+
+    public List<Order> getOrders() {
+        return orders;
     }
 
     @Override
