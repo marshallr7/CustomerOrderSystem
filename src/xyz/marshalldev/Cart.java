@@ -101,4 +101,8 @@ public class Cart {
     public double getTAX_RATE() {
         return TAX_RATE;
     }
+
+    public Map<Item, Integer> getItems() {
+        return cart;
+    }
 }

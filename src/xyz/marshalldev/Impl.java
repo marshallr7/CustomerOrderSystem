@@ -41,7 +41,7 @@ public class Impl {
         return scan.nextInt();
     }
 
-    private static void action(int option) {
+    public static void action(int option) {
         UserManager usermanager = UserManager.getInstance();
         if (Main.getUser() != null) {
             User user = Main.getUser();
@@ -53,10 +53,7 @@ public class Impl {
                     break;
                     // select
                 case 2:
-                    Item item = ItemManager.getInstance().getAttemptedItemPurchase();
-                    int quantity = ItemManager.getInstance().getAttemptedPurchaseQuantity();
-                    ItemManager.getInstance().purchase(item, quantity, Main.getUser().getCart());
-                    System.out.println("Successfully added " + quantity + "x " + item.getName() + " to your cart.");
+                    GUI.displayItems();
                     break;
                 case 3:
                     if (user.getCart() != null) {
@@ -88,6 +85,12 @@ public class Impl {
                     } else {
                         user.getCart().setTotal(user.getCart().getTotal()*user.getCart().getTAX_RATE());
                         if (Bank.getAccount(user.getCardNumber()).getBalance() >= user.getCart().getTotal()) {
+                            for (Item i : user.getCart().getItems().keySet()) {
+                                if (!ItemManager.getInstance().checkStock(i.getName(), user.getCart().getItems().get(i))) {
+                                    System.out.println("Item " + i.getName() + " needs to be refilled");
+                                    return;
+                                }
+                            }
                             int orderNumber = Bank.generateConfirmation();
                             Bank.getAccount(user.getCardNumber()).removeBalance(user.getCart().getTotal());
                             Order order = new Order(user.getCart(), orderNumber);
@@ -96,11 +99,31 @@ public class Impl {
                             System.out.println("Order successfully placed, your confirmation number is: " + orderNumber);
                         } else {
                             System.out.println("Insufficient funds, can not complete purchase.");
+                            user.getCart().clear();
+                            System.out.println("Cart cleared...");
                         }
                     }
                     break;
                 case 7:
                     usermanager.logout();
+                    break;
+                case 8:
+                    ItemManager.getInstance().getStock();
+                    break;
+                case 9:
+                    if (Main.supplier) {
+                        System.out.println("Applicable orders have been shipped.");
+                    } else {
+                        System.out.println("You do not have permission to perform this action");
+                    }
+                    break;
+                case 10:
+                    user.getOrders().forEach(o -> {
+                        System.out.println("Order number: " + o.getOrderNumber());
+                        System.out.println("\tDate: " + o.getDate());
+                        o.getCart().display();
+                    });
+                    GUI.getOrder();
                     break;
                 default:
                     System.exit(0);
@@ -114,6 +137,8 @@ public class Impl {
                 default -> System.out.println("Error... Invalid input.");
             }
         }
+        GUI gui = new GUI();
+        gui.drive();
     }
 
 }

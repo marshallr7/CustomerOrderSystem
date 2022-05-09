@@ -10,6 +10,7 @@ import java.util.Scanner;
 public class ItemManager {
 
     private final Map<String, Item> items = new HashMap<>();                  // Storage of items <ItemName - Item Object>
+    private final Map<String, Integer> stock = new HashMap<>();
     private static ItemManager instance;
 
     public static ItemManager getInstance() {
@@ -29,6 +30,7 @@ public class ItemManager {
             return;
         }
         cart.addItem(item, quantity);
+        stock.put(item.getName(), stock.get(item.getName())-quantity);
     }
 
 
@@ -68,6 +70,7 @@ public class ItemManager {
         for (Item i : item) {
             if (!items.containsKey(i.getName())) {
                 items.put(i.getName(), i);
+                stock.put(i.getName(), 100);
             }
         }
     }
@@ -76,5 +79,19 @@ public class ItemManager {
         for (Item i : items.values()) {
             System.out.println(i.toString());
         }
+    }
+
+    public Item findItem(String name) {
+        return items.get(name);
+    }
+
+    public void getStock() {
+        for (String s : stock.keySet()) {
+            System.out.println(s + " x" +stock.get(s));
+        }
+    }
+
+    public boolean checkStock(String item, int quantity) {
+        return stock.get(item) >= quantity;
     }
 }

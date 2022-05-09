@@ -8,12 +8,14 @@ import xyz.marshalldev.User.UserManager;
 public class Main {
 
     private static User user = null;
+    public static boolean supplier = false;
     public static final double STARTING_BANK_BALANCE = 15000d;
 
     public static void main(String[] args) {
         createTestItems();
         createTestUsers();
-        Impl.driver();
+        GUI gui = new GUI();
+        gui.drive();
     }
 
     public static User getUser() {

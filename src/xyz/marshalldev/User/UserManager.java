@@ -177,7 +177,7 @@ public class UserManager {
 
     // Check if ID exists in users
     // If it does, return true
-    private boolean checkID(int id) {
+    public boolean checkID(int id) {
         return users.containsKey(id);
     }
 }
